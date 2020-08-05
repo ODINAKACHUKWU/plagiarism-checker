@@ -1,0 +1,16 @@
+@import "../base.scss";
+
+.home-background {
+  @include screen-view;
+
+  background: $blue-light;
+  background-size: cover;
+}
+
+.banner-text {
+  font-size: 7rem;
+}
+
+#home-container {
+  overflow-x: auto;
+}

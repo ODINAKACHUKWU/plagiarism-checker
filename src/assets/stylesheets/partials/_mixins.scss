@@ -1,0 +1,21 @@
+@mixin margin-padding-0 {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin screen-view {
+  @include margin-padding-0;
+
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+@mixin two-color-background {
+  @include screen-view;
+
+  background-image: url("../../images/background.svg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

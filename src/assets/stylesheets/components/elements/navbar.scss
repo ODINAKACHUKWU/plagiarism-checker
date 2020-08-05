@@ -1,0 +1,14 @@
+@import "../../base.scss";
+
+.navbar-light {
+  .navbar-nav {
+    .nav-link {
+      color: $black !important;
+      font-size: 1.2rem;
+
+      &:hover {
+        color: $white !important;
+      }
+    }
+  }
+}

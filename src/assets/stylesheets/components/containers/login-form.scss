@@ -1,0 +1,32 @@
+@import "../../base.scss";
+
+.form {
+  background-color: $light;
+}
+
+h1.title {
+  font-size: 25px;
+}
+
+.link {
+  font-size: 13px;
+}
+
+p.link a {
+  color: $blue-light;
+}
+
+.btn-blue {
+  background-color: $blue-light !important;
+  color: $white !important;
+  padding: 0.45rem 1.2rem !important;
+}
+
+.btn-blue:hover {
+  background-color: $dark-blue !important;
+  color: $white !important;
+}
+
+p.alert {
+  display: none !important;
+}
