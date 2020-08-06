@@ -38,9 +38,13 @@ class LoginForm extends Component {
     if (userData.email && userData.password) {
       const { loginUser } = this.props;
       loginUser(userData).then(() => {
-        const { authenticated, history } = this.props;
+        const {
+          authenticated,
+          history: { push },
+        } = this.props;
+        console.log(">>>>>>>>", push);
         if (authenticated) {
-          history.push("/dashboard");
+          push("/dashboard");
         }
       });
     } else {

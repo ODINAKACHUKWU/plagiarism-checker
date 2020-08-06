@@ -46,7 +46,7 @@ const authRequest = (payload) => async (dispatch) => {
     localStorage.setItem("token", auth_token);
     dispatch(authSuccess(payload.email));
   } catch (error) {
-    dispatch(authFailure(error.response.data.message));
+    dispatch(authFailure(error.message));
   } finally {
     dispatch(processing(false));
   }
