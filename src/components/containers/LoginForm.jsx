@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import jwt from "../../utils/jwt";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import MDSpinner from "react-md-spinner";
+import { authRequest } from "../../actions/creators/authActions";
 import error from "../../helpers/error";
 
 // Styles
 import "../../assets/stylesheets/components/containers/signup-form.scss";
 
-class SignupForm extends Component {
+class LoginForm extends Component {
   state = {
     userData: {
       email: "",
@@ -32,8 +35,14 @@ class SignupForm extends Component {
     event.preventDefault();
     const { userData } = this.state;
 
-    if (userData.email) {
-      this.loginUser(userData.email);
+    if (userData.email && userData.password) {
+      const { loginUser } = this.props;
+      loginUser(userData).then(() => {
+        const { authenticated, history } = this.props;
+        if (authenticated) {
+          history.push("/dashboard");
+        }
+      });
     } else {
       error.displayError("Invalid credentials");
     }
@@ -46,6 +55,7 @@ class SignupForm extends Component {
 
   render() {
     const { email, password } = this.state;
+    const { processing, error } = this.props;
     return (
       <div className="container d-flex align-items-center justify-content-center h-100">
         <div className="row d-flex justify-content-center">
@@ -58,6 +68,11 @@ class SignupForm extends Component {
                 Welcome back! Please login to continue.
               </p>
               <div id="error"></div>
+              {error ? (
+                <div className="alert alert-danger text-center">{error}</div>
+              ) : (
+                ""
+              )}
               <form onSubmit={this.handleSubmit}>
                 <div className="input-group shadow-sm mb-4">
                   <div className="input-group-prepend">
@@ -113,8 +128,19 @@ class SignupForm extends Component {
                   </div>
                 </div>
                 <div className="d-flex justify-content-center">
-                  <button type="submit" className="btn btn-blue">
-                    Sign in
+                  <button
+                    type="submit"
+                    className="btn btn-blue"
+                    disabled={processing}
+                  >
+                    {processing ? (
+                      <div>
+                        <MDSpinner />
+                        <span className="ml-2">Sign in</span>
+                      </div>
+                    ) : (
+                      "Sign in"
+                    )}
                   </button>
                 </div>
               </form>
@@ -127,15 +153,29 @@ class SignupForm extends Component {
       </div>
     );
   }
-
-  loginUser = (email) => {
-    const token = jwt.encode(email);
-
-    if (token) {
-      localStorage.setItem("token", token);
-      window.location.href = `${origin}/dashboard`;
-    }
-  };
 }
 
-export default SignupForm;
+LoginForm.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  processing: PropTypes.bool.isRequired,
+  user: PropTypes.string.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = ({
+  auth: { processing, authenticated, user, error },
+}) => ({
+  user,
+  processing,
+  authenticated,
+  error,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (userData) => dispatch(authRequest(userData)),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+);

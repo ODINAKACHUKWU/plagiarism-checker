@@ -5,12 +5,12 @@ export default {
   decode: (token) => {
     return jwtDecode(token);
   },
-  encode: (email) => {
+  encode: (email, token) => {
     return jwt.sign(
       {
         data: email,
       },
-      "secret",
+      token,
       { expiresIn: "48h" }
     );
   },

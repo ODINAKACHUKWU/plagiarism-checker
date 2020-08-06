@@ -12,7 +12,7 @@ const initialState = {
   authenticated: false,
   processing: false,
   signingOut: false,
-  user: {},
+  user: "",
   error: "",
 };
 

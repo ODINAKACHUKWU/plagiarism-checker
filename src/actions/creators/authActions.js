@@ -1,5 +1,6 @@
 import axios from "axios";
 import TYPES from "../constants";
+import jwt from "../../utils/jwt";
 
 const {
   PROCESSING,
@@ -35,13 +36,14 @@ const logoutUser = () => ({
 
 const authRequest = (payload) => async (dispatch) => {
   const path = Object.keys(payload).includes("name") ? "/users" : "/sessions";
-  const BASE_URL = process.env.REACT_BASE_URL;
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   dispatch(processing(true));
   try {
     const url = `${BASE_URL}${path}`;
     const response = await axios.post(url, payload);
     const { token } = response.data;
-    localStorage.setItem("token", token);
+    const auth_token = jwt.encode(payload.email, token);
+    localStorage.setItem("token", auth_token);
     dispatch(authSuccess(payload.email));
   } catch (error) {
     dispatch(authFailure(error.response.data.message));

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faHistory,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logoutRequest } from "../../actions/creators/authActions";
 
 // Styles
 import "../../assets/stylesheets/components/elements/side-nav.scss";
@@ -37,8 +40,11 @@ class SideNav extends Component {
     document.body.style.backgroundColor = "#F1F3F9";
   };
 
-  handleLogout = () => {
-    localStorage.removeItem("token");
+  handleLogout = (event) => {
+    const { logoutUser, history } = this.props;
+    logoutUser().then(() => {
+      history.push("/");
+    });
   };
 
   render() {
@@ -95,4 +101,12 @@ class SideNav extends Component {
   };
 }
 
-export default SideNav;
+SideNav.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  logoutUser: () => dispatch(logoutRequest()),
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(SideNav));
