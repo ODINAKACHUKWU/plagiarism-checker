@@ -11,6 +11,46 @@
   font-size: 7rem;
 }
 
-#home-container {
-  overflow-x: auto;
+nav {
+  a.border-right {
+    border-color: $dark-blue !important;
+  }
+}
+
+nav.center-navbar {
+  a {
+    color: $black;
+    font-size: 3vh;
+  }
+}
+
+// Small devices (Mobile phones)
+@media (max-width: 767.98px) {
+  .banner-text {
+    font-size: 8vw !important;
+  }
+
+  img.plagiarism-icon {
+    max-width: 30% !important;
+  }
+
+  nav.center-navbar {
+    a {
+      font-size: 3vw;
+    }
+  }
+}
+
+// Medium devices (Tablets)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .banner-text {
+    font-size: 5rem;
+  }
+}
+
+// Large devices (Desktops)
+@media (min-width: 992px) {
+  nav.center-navbar {
+    display: none !important;
+  }
 }

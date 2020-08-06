@@ -1,14 +1,34 @@
 @import "../../base.scss";
 
-.navbar-light {
-  .navbar-nav {
-    .nav-link {
-      color: $black !important;
-      font-size: 1.2rem;
+.navbar-nav {
+  .nav-link {
+    color: $black !important;
+    font-size: 1.2rem;
 
-      &:hover {
-        color: $white !important;
-      }
+    &:hover {
+      color: $white !important;
     }
   }
+}
+
+.navbar {
+  position: absolute !important;
+}
+
+// Small devices (Mobile phones)
+@media (max-width: 767.98px) {
+  #top-navbar {
+    display: none !important;
+  }
+}
+
+// Medium devices (Tablets)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #top-navbar {
+    display: none !important;
+  }
+}
+
+// Large devices (Desktops)
+@media (min-width: 992px) {
 }

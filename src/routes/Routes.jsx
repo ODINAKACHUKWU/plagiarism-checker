@@ -2,6 +2,7 @@ import HomePage from "../views/HomePage";
 import SignupPage from "../views/SignupPage";
 import LoginPage from "../views/LoginPage";
 import Dashboard from "../views/Dashboard";
+import LogsPage from "../views/LogsPage";
 
 export default {
   default: [
@@ -26,6 +27,11 @@ export default {
       exact: true,
       path: "/dashboard",
       component: Dashboard,
+    },
+    {
+      exact: true,
+      path: "/logs",
+      component: LogsPage,
     },
   ],
 };

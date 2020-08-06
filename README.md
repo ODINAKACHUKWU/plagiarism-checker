@@ -9,7 +9,6 @@ This application compares two uploaded text files for plagiarism and displays th
 - [Getting Started](#Getting-Started "Goto Getting-Started")
 - [Technology Stack](#Technology-Stack "Goto Technology-Stack")
 - [Installation](#Installation "Goto Installation")
-- [Link to the deployed application](#Link-to-the-deployed-application "Link to the deployed application")
 
 ## Getting Started
 
@@ -18,6 +17,7 @@ This is a frontend javascript application built with [React JS](https://reactjs.
 ## Technology Stack
 
 - ReactJS
+- Redux
 - Bootstrap
 
 ## Installation
@@ -39,7 +39,3 @@ This is a frontend javascript application built with [React JS](https://reactjs.
 - ### Development
 
 `npm start`
-
-## Link to the deployed application
-
-https://originality-checker.herokuapp.com
