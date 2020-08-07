@@ -24,7 +24,7 @@ const compareRequest = (payload, userId) => async (dispatch) => {
   try {
     const url = `${BASE_URL}/users/${userId}/compare`;
     const response = await axios.post(url, payload);
-    dispatch(comparismSuccess(response.data));
+    dispatch(comparismSuccess(response.data.similarity));
   } catch (error) {
     dispatch(comparismFailure(error.message));
   } finally {

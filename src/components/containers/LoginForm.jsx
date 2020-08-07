@@ -42,7 +42,6 @@ class LoginForm extends Component {
           authenticated,
           history: { push },
         } = this.props;
-        console.log(">>>>>>>>", push);
         if (authenticated) {
           push("/dashboard");
         }

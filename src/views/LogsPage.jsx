@@ -1,17 +1,13 @@
 import React from "react";
-import SideNav from "../components/elements/SideNav";
 import Logs from "../components/containers/Logs";
 
 // Styles
-// import "../assets/stylesheets/views/homepage.scss";
+import "../assets/stylesheets/views/logs-page.scss";
 
 const LogsPage = () => {
   return (
     <div>
-      <SideNav />
-      <div id="main">
-        <Logs />
-      </div>
+      <Logs />
     </div>
   );
 };

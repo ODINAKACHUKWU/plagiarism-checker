@@ -42,7 +42,7 @@ const authRequest = (payload) => async (dispatch) => {
     const url = `${BASE_URL}${path}`;
     const response = await axios.post(url, payload);
     const { token } = response.data;
-    const auth_token = jwt.encode(payload.email, token);
+    const auth_token = jwt.encode(response.data.user.id, token);
     localStorage.setItem("token", auth_token);
     dispatch(authSuccess(payload.email));
   } catch (error) {

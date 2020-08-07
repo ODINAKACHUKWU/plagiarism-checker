@@ -1,0 +1,12 @@
+@import "../../base.scss";
+
+.btn-blue {
+  background-color: $blue-light !important;
+  color: $white !important;
+  padding: 0.45rem 1.2rem !important;
+}
+
+.btn-blue:hover {
+  background-color: $dark-blue !important;
+  color: $white !important;
+}

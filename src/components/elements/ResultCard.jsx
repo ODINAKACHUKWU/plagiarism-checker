@@ -10,7 +10,6 @@ import {
 import "../../assets/stylesheets/components/elements/result-card.scss";
 
 class ResultCard extends Component {
-  //   static defaultProps = { result: 20 };
   render() {
     const { result } = this.props;
     return (

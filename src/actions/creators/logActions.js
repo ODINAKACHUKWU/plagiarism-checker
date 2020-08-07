@@ -1,48 +1,70 @@
 import axios from "axios";
 import TYPES from "../constants";
 
-const { COMPARING, COMPARISM_SUCCESS, COMPARISM_FAILURE } = TYPES;
+const {
+  FETCHING_LOG,
+  FETCHING_LOGS,
+  FETCH_LOGS_SUCCESS,
+  FETCH_LOGS_FAILURE,
+  FETCH_LOG_SUCCESS,
+  FETCH_LOG_FAILURE,
+} = TYPES;
 
-const comparing = (bool) => ({
-  type: COMPARING,
+const fetchingLog = (bool) => ({
+  type: FETCHING_LOG,
   bool,
 });
 
-const comparismSuccess = (result) => ({
-  type: COMPARISM_SUCCESS,
-  result,
+const fetchingLogs = (bool) => ({
+  type: FETCHING_LOGS,
+  bool,
 });
 
-const comparismFailure = (error) => ({
-  type: COMPARISM_FAILURE,
+const fetchLogSuccess = (log) => ({
+  type: FETCH_LOG_SUCCESS,
+  log,
+});
+
+const fetchLogFailure = (error) => ({
+  type: FETCH_LOG_FAILURE,
   error,
 });
 
-const fetchLogsRequest = (payload) => async (dispatch) => {
+const fetchLogsSuccess = (logs) => ({
+  type: FETCH_LOGS_SUCCESS,
+  logs,
+});
+
+const fetchLogsFailure = (error) => ({
+  type: FETCH_LOGS_FAILURE,
+  error,
+});
+
+const fetchLogsRequest = (userId) => async (dispatch) => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  dispatch(comparing(true));
+  dispatch(fetchingLogs(true));
   try {
-    const url = `${BASE_URL}/compare`;
-    const response = await axios.post(url, payload);
-    dispatch(comparismSuccess(response.data));
+    const url = `${BASE_URL}/users/${userId}/logs`;
+    const response = await axios.get(url);
+    dispatch(fetchLogsSuccess(response.data.data));
   } catch (error) {
-    dispatch(comparismFailure(error.message));
+    dispatch(fetchLogsFailure(error.message));
   } finally {
-    dispatch(comparing(false));
+    dispatch(fetchingLogs(false));
   }
 };
 
-const fetchLogRequest = (payload) => async (dispatch) => {
+const fetchLogRequest = (userId, id) => async (dispatch) => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  dispatch(comparing(true));
+  dispatch(fetchingLog(true));
   try {
-    const url = `${BASE_URL}/compare`;
-    const response = await axios.post(url, payload);
-    dispatch(comparismSuccess(response.data));
+    const url = `${BASE_URL}/users/${userId}/logs/${id}`;
+    const response = await axios.get(url);
+    dispatch(fetchLogSuccess(response.data.data.data));
   } catch (error) {
-    dispatch(comparismFailure(error.message));
+    dispatch(fetchLogFailure(error.message));
   } finally {
-    dispatch(comparing(false));
+    dispatch(fetchingLog(false));
   }
 };
 

@@ -6,6 +6,7 @@ import MDSpinner from "react-md-spinner";
 import compareRequest from "../../actions/creators/comparismActions";
 import ResultCard from "../elements/ResultCard";
 import error from "../../helpers/error";
+import fetcher from "../../helpers/fetcher";
 
 // Styles
 import "../../assets/stylesheets/components/containers/comparism-form.scss";
@@ -57,7 +58,8 @@ class ComparismForm extends Component {
 
     if (isValid) {
       const { compareDocuments } = this.props;
-      compareDocuments(documentsData);
+      const userId = fetcher.getUserId();
+      compareDocuments(documentsData, userId);
     } else {
       error.displayError("Please provide all inputs");
     }
